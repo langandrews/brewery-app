@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FormEvent, SyntheticEvent, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useInput } from "./hooks/input-hook";
+import "./App.css";
 
-function App() {
+export default function App() {
+  const { value: state, bind: bindState, reset: resetState } = useInput("");
+  const { value: city, bind: bindCity, reset: resetCity } = useInput("");
+  const handleBrewerySearch = (event: FormEvent) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleBrewerySearch}>
+        <div className="row">
+          <label>
+            City:
+            <div className="row">
+              <input type="text" {...bindCity} />
+            </div>
+          </label>
+        </div>
+        <div className="row">
+          <label>
+            State:
+            <div className="row">
+              <input type="text" {...bindState} />
+            </div>
+          </label>
+        </div>
+        <div className="row">
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
     </div>
   );
 }
-
-export default App;
