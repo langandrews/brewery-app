@@ -13,7 +13,7 @@ export interface Brewery {
     longitude: String,
     latitude: String,
     phone: String,
-    website_url: String,
+    website_url: string,
     updated_at: String,
     created_at: String
   }

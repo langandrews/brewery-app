@@ -1,5 +1,4 @@
 import React, { FormEvent, SyntheticEvent, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useInput } from "./hooks/input-hook";
 import { Brewery } from "./types/Brewery";
 import "./App.css";
@@ -11,7 +10,9 @@ export default function App() {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
 
   let breweryList = breweries.map(brewery =>
-    <li>{brewery.name}</li>
+    <li>
+      <a href={brewery.website_url} target="_blank">{brewery.name}</a>
+    </li>
   )
   
   const handleBrewerySearch = (event: FormEvent) => {
@@ -28,23 +29,23 @@ export default function App() {
   return (
     <div className="App">
       <form onSubmit={handleBrewerySearch}>
-        <div className="row">
+        <div>
           <label>
             City:
-            <div className="row">
+            <div>
               <input type="text" {...bindCity} />
             </div>
           </label>
         </div>
-        <div className="row">
+        <div>
           <label>
             State:
-            <div className="row">
+            <div>
               <input type="text" {...bindState} />
             </div>
           </label>
         </div>
-        <div className="row">
+        <div>
           <input type="submit" value="Submit" />
         </div>
       </form>
