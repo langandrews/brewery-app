@@ -12,6 +12,7 @@ import { Brewery } from "./types/Brewery";
 import "./App.css";
 import axios from "axios";
 import BreweryForm from "./components/BreweryForm";
+import BreweryInfo from "./components/BreweryInfo";
 
 export default function App() {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
@@ -34,6 +35,7 @@ export default function App() {
             <ul>{breweryList}</ul>
           </Route>
           <Route path="/breweries/:id">
+            <BreweryInfo breweries={breweries} />
             <Link to="/home">Back</Link>
           </Route>
         </Switch>
