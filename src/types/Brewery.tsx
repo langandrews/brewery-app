@@ -1,4 +1,4 @@
-export interface Brewery {
+export type Brewery = {
     id: string,
     name: string,
     brewery_type: string,
