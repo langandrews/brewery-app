@@ -1,16 +1,13 @@
-import React, { FormEvent, SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import {
   Route,
   Link,
-  Router,
   Switch,
   BrowserRouter,
   Redirect,
 } from "react-router-dom";
-import { useInput } from "./hooks/input-hook";
 import { Brewery } from "./types/Brewery";
 import "./App.css";
-import axios from "axios";
 import BreweryForm from "./components/BreweryForm";
 import BreweryInfo from "./components/BreweryInfo";
 

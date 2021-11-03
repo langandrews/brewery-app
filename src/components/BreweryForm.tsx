@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import axios from "axios";
 import { FormEvent } from "react";
 import { useInput } from "../hooks/input-hook";
