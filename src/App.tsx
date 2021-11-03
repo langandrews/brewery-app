@@ -1,5 +1,12 @@
 import React, { FormEvent, SyntheticEvent, useState } from "react";
-import { Route, Link } from "react-router-dom";
+import {
+  Route,
+  Link,
+  Router,
+  Switch,
+  BrowserRouter,
+  Redirect,
+} from "react-router-dom";
 import { useInput } from "./hooks/input-hook";
 import { Brewery } from "./types/Brewery";
 import "./App.css";
@@ -9,19 +16,28 @@ import BreweryForm from "./components/BreweryForm";
 export default function App() {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
 
-  let breweryList = breweries.map(brewery =>
+  let breweryList = breweries.map((brewery) => (
     <li>
-      <p>{brewery.name}</p>
+      <Link to={"/breweries/" + brewery.id}>{brewery.name}</Link>
     </li>
-  )
-  
+  ));
 
   return (
     <div className="App">
-      <BreweryForm setBreweriesCallback={setBreweries}/>
-      <ul>
-        {breweryList}
-      </ul>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Route path="/home">
+            <BreweryForm setBreweriesCallback={setBreweries} />
+            <ul>{breweryList}</ul>
+          </Route>
+          <Route path="/breweries/:id">
+            <Link to="/home">Back</Link>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
