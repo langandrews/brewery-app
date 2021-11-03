@@ -10,10 +10,7 @@ export default function App() {
 
   let breweryList = breweries.map(brewery =>
     <li>
-      <a href={brewery.website_url} target="_blank">{brewery.name}</a>
-      <p>{brewery.phone}</p>
-      <p>{brewery.latitude}</p>
-      <p>{brewery.longitude}</p>
+      <p>{brewery.name}</p>
     </li>
   )
   
