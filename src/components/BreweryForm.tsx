@@ -1,7 +1,10 @@
 import axios from "axios";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useInput } from "../hooks/input-hook";
 import { Brewery } from "../types/Brewery";
+import { stateOptions } from "../data/states";
+import Dropdown, { Option } from "react-dropdown";
+
 
 type BreweryFormProps = {
   setBreweriesCallback: (breweries: Brewery[]) => void;
@@ -10,11 +13,11 @@ type BreweryFormProps = {
 export default function BreweryForm({
   setBreweriesCallback,
 }: BreweryFormProps) {
-  const { value: state, bind: bindState, reset: resetState } = useInput("");
+  const [state, setState] = useState<Option>({"value": "", "label": ""})
   const { value: city, bind: bindCity, reset: resetCity } = useInput("");
 
   const handleBrewerySearch = (event: FormEvent) => {
-    let stateQueryParameter = "by_state=" + state;
+    let stateQueryParameter = "by_state=" + state?.value;
     let cityQueryParameter = "by_city=" + city;
     axios
       .get<Brewery[]>(
@@ -25,6 +28,7 @@ export default function BreweryForm({
       )
       .then((response) => {
         setBreweriesCallback(response.data);
+        console.log(response.data);
       });
 
     event.preventDefault();
@@ -43,9 +47,7 @@ export default function BreweryForm({
       <div>
         <label>
           State:
-          <div>
-            <input type="text" {...bindState} />
-          </div>
+          <Dropdown options={stateOptions} placeholder="Select an option" onChange={(option: Option) => {setState(option)}}/>
         </label>
       </div>
       <div>

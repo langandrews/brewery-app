@@ -5,8 +5,10 @@ type BreweryInfoProps = { breweries: Brewery[] };
 type BreweryInfoParams = { id: string };
 
 export default function BreweryInfo({ breweries }: BreweryInfoProps) {
+    console.log("1: ", breweries);
   let { id } = useParams<BreweryInfoParams>();
-  const breweryInfo = breweries.find((brewery) => (brewery.id = id));
+  console.log("2: ", breweries);
+  const breweryInfo = breweries.filter((brewery) => (brewery.id = id))[0];
   const breweryGoogleMapsUrl =
     "https://www.google.com/maps/search/?api=1&query=" +
     breweryInfo?.latitude +
