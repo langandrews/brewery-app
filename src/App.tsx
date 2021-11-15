@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Route,
-  Link,
-  Switch,
-  BrowserRouter,
-  Redirect,
-} from "react-router-dom";
+import { Route, Link, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import { Brewery } from "./types/Brewery";
 import "./App.css";
 import BreweryForm from "./components/BreweryForm";
@@ -15,7 +9,7 @@ export default function App() {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
 
   let breweryList = breweries.map((brewery) => (
-    <li>
+    <li key={brewery.id}>
       <Link to={"/breweries/" + brewery.id}>{brewery.name}</Link>
     </li>
   ));
