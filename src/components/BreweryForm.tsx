@@ -17,14 +17,11 @@ export default function BreweryForm({
   const { value: city, bind: bindCity, reset: resetCity } = useInput("");
 
   const handleBrewerySearch = (event: FormEvent) => {
-    let stateQueryParameter = "by_state=" + state?.value;
-    let cityQueryParameter = "by_city=" + city;
+    let stateQueryParameter = `by_state=${state?.value}`;
+    let cityQueryParameter = `by_city=${city}`;
     axios
       .get<Brewery[]>(
-        "https://api.openbrewerydb.org/breweries?" +
-          stateQueryParameter +
-          "&" +
-          cityQueryParameter
+        `https://api.openbrewerydb.org/breweries?${stateQueryParameter}&${cityQueryParameter}`
       )
       .then((response) => {
         setBreweriesCallback(response.data);
